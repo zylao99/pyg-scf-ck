@@ -1,0 +1,17 @@
+server: 
+  port: 9013
+spring: 
+  application:  
+    name: tensquare-article-crawler #指定服务名
+  datasource:  
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.66.133:3306/tensquare_article?characterEncoding=UTF8
+    username: root
+    password: 123456
+  jpa: 
+    database: MySQL
+    show-sql: true
+redis:
+  host: 192.168.66.133
+ai:
+  dataPath: e:/ai   # 原始文本的路径

@@ -1,0 +1,10 @@
+server: 
+  port: 9014
+spring: 
+  application:  
+    name: tensquare-ai #指定服务名
+ai:
+  dataPath: e:/ai # 分词语料库路径
+  wordLib: e:/article.txt  # 分词语料库合并文本
+  vecModel: e:/article.vecmodel # 词向量模型文件
+  cnnModel: e:/article.cnnmodel # 卷积神经网络模型文件
