@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="plugins/angularjs/angular.min.js"></script>
+    <script type="text/javascript">
+
+        //定义模块
+        var app = angular.module("pyg", []);
+
+        //在模块下面定义控制器
+        app.controller("funController", function ($scope) {
+            //简单数组
+            $scope.list = [12, 23, 55, 66, 88, 100];
+
+            //对象数组
+            $scope.userList = [{name: '张三', shuxue: 100, yuwen: 93},
+                {name: '李四', shuxue: 88, yuwen: 87},
+                {name: '王五', shuxue: 77, yuwen: 56}
+            ];
+
+        })
+
+    </script>
+</head>
+<body ng-app="pyg" ng-controller="funController">
+<ul>
+    <li ng-repeat="x in list">
+        {{x}}
+    </li>
+</ul>
+<hr size="2" color="blue">
+<table style="width: 900px;height: 200px;" border="1">
+    <tr>
+        <td>姓名</td>
+        <td>数学</td>
+        <td>语文</td>
+    </tr>
+    <tr ng-repeat="entity in userList">
+        <td>{{entity.name}}</td>
+        <td>{{entity.shuxue}}</td>
+        <td>{{entity.yuwen}}</td>
+    </tr>
+</table>
+</body>
+</html>

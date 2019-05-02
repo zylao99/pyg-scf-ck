@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+             http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+                  http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+    <!--1,放行不需要安全认证的资源：静态资源..-->
+    <http pattern="/js/**" security="none"></http>
+    <http pattern="/css/**" security="none"></http>
+    <http pattern="/img/**" security="none"></http>
+    <http pattern="/plugins/**" security="none"></http>
+    <http pattern="/register.html" security="none"></http>
+    <http pattern="/shoplogin.html" security="none"></http>
+    <http pattern="/shoplogin_error.html" security="none"></http>
+    <http pattern="/seller/add" security="none"></http>
+    <!--<http pattern="/logout" security="none"></http>-->
+    <!--2,配置权限拦截规则-->
+    <http>
+        <!--
+            intercept-url:拦截请求
+            pattern：拦截所有请求
+            access：匹配认证所有角色具有角色
+        -->
+        <intercept-url pattern="/**" access="hasRole('ROLE_USER')"></intercept-url>
+        <!--
+            表单登录认证：form-login
+            login-page:指定登录页面
+            default-target-url:始终指向登录成功后访问页面
+            always-use-default-target：登录成功，始终指向默认页面
+            authentication-failure-url：指定登录失败跳转的地址
+        -->
+        <form-login login-page="/shoplogin.html"
+                    default-target-url="/admin/index.html"
+                    always-use-default-target="true"
+                    authentication-failure-url="/shoplogin_error.html"></form-login>
+        <!--关闭跨域-->
+        <csrf disabled="true"></csrf>
+        <!--iframe安全控制-->
+        <headers>
+            <frame-options policy="SAMEORIGIN"></frame-options>
+        </headers>
+
+        <!--退出-->
+        <logout logout-success-url="/shoplogin.html"></logout>
+
+    </http>
+    <!--原生XML方式引入远程商家对象-->
+    <dubbo:reference id="sellerService" interface="com.pyg.manager.service.SellerService"/>
+
+    <!--自定义认证类-->
+    <beans:bean id="userDtailService" class="com.pyg.shop.service.impl.UserDtailServiceImpl">
+        <beans:property name="sellerService" ref="sellerService"></beans:property>
+    </beans:bean>
+
+    <!--bcrypt 密码算法-->
+    <beans:bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></beans:bean>
+
+    <!--3,认证管理器-->
+    <authentication-manager>
+        <authentication-provider user-service-ref="userDtailService">
+            <password-encoder ref="passwordEncoder"></password-encoder>
+        </authentication-provider>
+    </authentication-manager>
+</beans:beans>

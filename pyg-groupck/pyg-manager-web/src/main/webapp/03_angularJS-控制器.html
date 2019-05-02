@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="plugins/angularjs/angular.min.js"></script>
+    <script type="text/javascript">
+        //控制器1
+        //$scope是angularJS全局作用域,$scope绑定所有变量，函数，对象
+        function fun1($scope) {
+            $scope.greeting = {
+                text: "angularJS,你很牛逼!"
+            }
+        }
+
+        function fun2($scope) {
+            $scope.user = {
+                name: "张无忌",
+                age: 11
+            }
+        }
+    </script>
+</head>
+<body ng-app>
+    <div ng-controller="fun1">
+        您好，{{greeting.text}}
+    </div>
+    <div ng-controller="fun2">
+        您好，{{user.name}},你多大了？ {{user.age}}
+    </div>
+    外部展示：{{user.name}}
+</body>
+</html>

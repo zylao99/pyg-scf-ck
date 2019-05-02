@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="plugins/angularjs/angular.min.js"></script>
+    <script type="text/javascript">
+
+        //定义模块
+        var app = angular.module("pyg", []);
+
+        //在模块下面定义控制器
+        app.controller("funController", function ($scope,$http) {
+            //$http用来想后台服务器发送请求
+            //$http.get(url).success(function(data){})
+            //$http.post(url,entity).success(function(data){})
+            //发送get请求，获取json数据结果
+            $http.get("data.json").success(function (data) {
+                $scope.userList = data;
+            })
+        })
+
+    </script>
+</head>
+<body ng-app="pyg" ng-controller="funController">
+
+<table style="width: 900px;height: 200px;" border="1">
+    <tr>
+        <td>姓名</td>
+        <td>数学</td>
+        <td>语文</td>
+    </tr>
+    <tr ng-repeat="entity in userList">
+        <td>{{entity.name}}</td>
+        <td>{{entity.shuxue}}</td>
+        <td>{{entity.yuwen}}</td>
+    </tr>
+</table>
+</body>
+</html>

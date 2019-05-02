@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>商家完善资料</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+  
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+	<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../plugins/angularjs/angular.min.js"></script>
+    <script src="../js/base.js"></script>
+    <script src="../js/service/uploadService.js"></script>
+    <script src="../js/service/sellerService.js"></script>
+    <script src="../js/controller/baseController.js"></script>
+    <script src="../js/controller/sellerController.js"></script>
+   
+    
+</head>
+
+<body ng-app="pyg" ng-controller="sellerController" ng-init="sellerMessage();" class="hold-transition skin-red sidebar-mini" >
+
+
+
+            <!-- 正文区域 -->
+            <section class="content">
+
+                <div class="box-body">
+
+                    <!--tab页-->
+                    <div class="nav-tabs-custom">
+
+                        <!--tab头-->
+                        <ul class="nav nav-tabs">
+                       		
+                            <li class="active">
+                                <a href="#home" data-toggle="tab">商家信息</a>                             
+                            </li>
+
+                        </ul>
+                        <!--tab头/-->
+						
+                        <!--tab内容-->
+                        <div class="tab-content">
+
+                            <!--表单内容-->
+                            <div class="tab-pane active"  id="home">
+                                <div class="row data-type">                                  
+
+                                    <div class="col-md-2 title">公司名称</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control" ng-model="entity.name"  placeholder="公司名称" value=""/>
+                                    </div>
+									
+									<div class="col-md-2 title">公司手机</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control" ng-model="entity.mobile"  placeholder="公司手机" value="">
+                                    </div>
+                                    
+                                    <div class="col-md-2 title">公司电话</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control"  ng-model="entity.telephone"  placeholder="公司电话" value="">
+                                    </div>
+
+                                    <div class="col-md-2 title">EMAIL</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control"  ng-model="entity.email"  placeholder="EMAIL" value="">
+                                    </div>
+
+                                    <div class="col-md-2 title">创建日期</div>
+                                    <div class="col-md-10 data">
+                                        <input type="date" class="form-control" ng-model="entity.createTime"  placeholder="创建日期" value="">
+                                    </div>
+
+                                    <div class="col-md-2 title">公司详细地址</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control"  ng-model="entity.addressDetail"  placeholder="公司详细地址" value="">
+                                    </div>
+
+                                    <div class="col-md-2 title">公司地址</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control"  ng-model="entity.address"  placeholder="公司地址" value="">
+                                    </div>
+
+                                    <div class="col-md-2 title">公司LOGO图</div>
+                                    <div class="col-md-10 data">
+                                        <button type="button" class="btn btn-default" title="新建" ng-model="entity.logoPic" data-target="#uploadModal"  data-toggle="modal" ng-click="image_entity={}" ><i class="fa fa-file-o"></i>图片上传</button>
+                                        {{entity.logoPic}}
+                                    </div>
+                                    <br/>
+                                    <div class="col-md-2 title">联系人姓名</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control" ng-model="entity.linkmanName" placeholder="联系人姓名" value="">
+                                    </div>
+                                    
+                                    <div class="col-md-2 title">联系人QQ</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control" ng-model="entity.linkmanQq"   placeholder="联系人QQ" value="">
+                                    </div>
+                                    
+                                    <div class="col-md-2 title">联系人手机</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control" ng-model="entity.linkmanMobile"   placeholder="联系人手机" value="">
+                                    </div>
+                                    
+                                    <div class="col-md-2 title">联系人EMAIL</div>
+                                    <div class="col-md-10 data">
+
+
+                                        <input type="text" class="form-control"  ng-model="entity.linkmanEmail"  placeholder="联系人EMAIL" value="">
+                                    </div>
+                                    
+                                    <div class="col-md-2 title">营业执照号</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control" ng-model="entity.licenseNumber"   placeholder="营业执照号" value="">
+                                    </div>
+                                     
+                                    <div class="col-md-2 title">税务登记证号</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control" ng-model="entity.taxNumber"   placeholder="税务登记证号" value="">
+                                    </div>
+                                    
+ 									<div class="col-md-2 title">组织机构代码证</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control" ng-model="entity.orgNumber"  placeholder="组织机构代码证" value="">
+                                    </div>
+                                    
+                                    <div class="col-md-2 title">法定代表人</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control" ng-model="entity.legalPerson"   placeholder="法定代表人" value="">
+                                    </div>
+                                    
+ 									<div class="col-md-2 title">法定代表人身份证号</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control" ng-model="entity.legalPersonCardId"   placeholder="法定代表人身份证号" value="">
+                                    </div>
+
+ 									<div class="col-md-2 title">开户行名称</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control" ng-model="entity.bankName" placeholder="开户行名称" value="">
+                                    </div>
+
+                                    <div class="col-md-2 title">简介</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control" ng-model="entity.brief"  placeholder="简介" value="">
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
+                            
+                           
+                            
+                        </div>
+                        <!--tab内容/-->
+						<!--表单内容/-->
+							 
+                    </div>
+
+                   </div>
+                  <div class="btn-toolbar list-toolbar">
+				      <button class="btn btn-primary" ng-click="save()"><i class="fa fa-save"></i>保存</button>
+				      <!--<a ng-click="submit()" data-toggle="modal" class="btn btn-danger">提交</a>-->
+				  </div>
+                <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" >
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h3 id="myModalLabel">上传公司LOGO图片</h3>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-bordered table-striped">
+                                    <tr>
+                                        <td>公司LOGO图片</td>
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <input type="file" id="file" />
+                                                        <button class="btn btn-primary" type="button" ng-click="uploadFile()">
+                                                            上传
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <img  ng-src="{{image_entity.url}}" width="200px" height="200px">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-success" ng-click="add_image_entity()" data-dismiss="modal" aria-hidden="true">保存</button>
+                                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			
+            </section>
+            <!-- 正文区域 /-->
+			
+       
+</body>
+
+</html>

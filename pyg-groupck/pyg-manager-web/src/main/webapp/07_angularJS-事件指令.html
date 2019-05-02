@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="plugins/angularjs/angular.min.js"></script>
+    <script type="text/javascript">
+
+        //定义模块
+        var app = angular.module("pyg", []);
+
+        //在模块下面定义控制器
+        app.controller("funController", function ($scope) {
+
+            $scope.add = function (a, b) {
+
+                $scope.z = parseInt(a) + parseInt(b);
+            }
+
+        })
+
+    </script>
+</head>
+<body ng-app="pyg" ng-controller="funController">
+x坐标:<input type="text" ng-model="x"><br>
+y坐标:<input type="text" ng-model="y"><br>
+坐标展示：x坐标 : {{x}}   y坐标 : {{y}}
+<hr>
+函数1：需要传递参数 <br>
+<button ng-click="add(x,y)">x+y</button>
+显示结果:{{z}}
+</body>
+</html>
